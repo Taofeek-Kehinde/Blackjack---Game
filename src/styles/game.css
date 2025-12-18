@@ -1,0 +1,773 @@
+/* All css file using external css ! */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-green: #0a5c36;
+  --dark-green: #073b24;
+  --casino-red: #cc3333;
+  --casino-gold: #ffd700;
+  --casino-yellow: #ffcc00;
+  --card-white: #ffffff;
+  --card-red: #cc0000;
+  --card-black: #000000;
+  --score-green: #4CAF50;
+  --score-red: #f44336;
+  --gray-light: #f5f5f5;
+  --gray-dark: #333333;
+  --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  --card-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+  min-height: 100vh;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Game container */
+.game-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 100vh;
+}
+
+/* Header styles */
+.game-header {
+  text-align: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  animation: slideDown 0.8s ease-out;
+}
+
+.game-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: var(--casino-gold);
+  text-shadow: 3px 3px 0 var(--casino-red);
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: 900;
+}
+
+.game-subtitle {
+  font-size: clamp(1rem, 2vw, 1.3rem);
+  color: var(--gray-light);
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+/* Score display */
+.score-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 20px;
+  animation: fadeIn 1s ease-out;
+}
+
+.score-box {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 15px 30px;
+  border-radius: 15px;
+  border: 2px solid var(--casino-gold);
+  min-width: 150px;
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.score-box:hover {
+  transform: scale(1.05);
+}
+
+.score-box.player {
+  border-color: var(--score-green);
+}
+
+.score-box.dealer {
+  border-color: var(--score-red);
+}
+
+.score-label {
+  font-size: 1rem;
+  color: var(--gray-light);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.score-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.player .score-value {
+  color: var(--score-green);
+}
+
+.dealer .score-value {
+  color: var(--score-red);
+}
+
+/* Game status */
+.status-container {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 20px;
+  border-radius: 15px;
+  margin: 20px auto;
+  max-width: 600px;
+  border: 3px solid var(--casino-gold);
+  text-align: center;
+  animation: pulse 2s infinite;
+  box-shadow: var(--shadow);
+}
+
+.status-message {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--casino-gold);
+}
+
+.status-submessage {
+  color: var(--gray-light);
+  font-size: 1.1rem;
+}
+
+/* Game layout */
+.game-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+@media (min-width: 1024px) {
+  .game-layout {
+    grid-template-columns: 1fr 2fr;
+  }
+}
+
+/* Game table */
+.game-table {
+  background: linear-gradient(135deg, #1a472a, #0a5c36);
+  border-radius: 25px;
+  padding: 30px;
+  border: 8px solid var(--casino-gold);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.game-table::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+.table-divider {
+  height: 4px;
+  background: linear-gradient(90deg, transparent, var(--casino-gold), transparent);
+  margin: 40px 0;
+  position: relative;
+}
+
+.table-divider::before {
+  content: 'BLACKJACK';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--dark-green);
+  padding: 0 20px;
+  color: var(--casino-gold);
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* Hand styles */
+.hand-container {
+  margin: 30px 0;
+  animation: slideIn 0.5s ease-out;
+}
+
+.hand-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.hand-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  color: white;
+  font-weight: bold;
+}
+
+.hand-score {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  border: 2px solid var(--casino-gold);
+}
+
+.blackjack-badge {
+  background: var(--casino-gold);
+  color: black;
+  padding: 8px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+  animation: bounce 1s infinite;
+  box-shadow: 0 0 15px var(--casino-yellow);
+}
+
+/* Cards container */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  min-height: 180px;
+}
+
+/* Individual card */
+.card {
+  width: 120px;
+  height: 160px;
+  background: var(--card-white);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--card-shadow);
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s ease, box-shadow 0.3s ease;
+  animation: dealCard 0.6s ease-out;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-10px) rotateY(10deg);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+.card-hidden {
+  background: linear-gradient(45deg, #1a237e, #283593);
+  color: white;
+}
+
+.card-value {
+  font-size: 2rem;
+  font-weight: bold;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.card-suit {
+  font-size: 3rem;
+  margin: 10px 0;
+}
+
+.card-name {
+  font-size: 0.8rem;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: var(--gray-dark);
+}
+
+/* Suit colors */
+.suit-hearts { color: var(--card-red); }
+.suit-diamonds { color: var(--card-red); }
+.suit-clubs { color: var(--card-black); }
+.suit-spades { color: var(--card-black); }
+
+/* Game controls */
+.controls-container {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 30px;
+  border-radius: 20px;
+  border: 3px solid var(--casino-gold);
+  box-shadow: var(--shadow);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.controls-title {
+  font-size: 1.8rem;
+  color: var(--casino-gold);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+@media (min-width: 640px) {
+  .buttons-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+.game-button {
+  padding: 18px 30px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 180px;
+  animation: buttonGlow 2s infinite alternate;
+}
+
+.game-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-button:active {
+  transform: translateY(0);
+}
+
+.button-hit {
+  background: linear-gradient(135deg, var(--score-green), #2e7d32);
+  color: white;
+}
+
+.button-stand {
+  background: linear-gradient(135deg, #2196F3, #0d47a1);
+  color: white;
+}
+
+.button-reset {
+  background: linear-gradient(135deg, var(--score-red), #b71c1c);
+  color: white;
+}
+
+.button-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.button-disabled:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Rules section */
+.rules-container {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 25px;
+  border-radius: 15px;
+  margin-top: 20px;
+}
+
+.rules-title {
+  font-size: 1.5rem;
+  color: var(--casino-gold);
+  margin-bottom: 15px;
+}
+
+.rules-list {
+  list-style: none;
+}
+
+.rules-list li {
+  margin: 12px 0;
+  padding-left: 30px;
+  position: relative;
+  color: var(--gray-light);
+  font-size: 1.1rem;
+}
+
+.rules-list li::before {
+  content: '♠';
+  position: absolute;
+  left: 0;
+  color: var(--casino-gold);
+  font-size: 1.2rem;
+}
+
+/* Value indicators */
+.value-indicators {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.value-box {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 15px;
+  text-align: center;
+  border: 2px solid;
+  transition: transform 0.3s ease;
+}
+
+.value-box:hover {
+  transform: scale(1.05);
+}
+
+.value-box.player {
+  border-color: var(--score-green);
+}
+
+.value-box.dealer {
+  border-color: var(--score-red);
+}
+
+.value-label {
+  font-size: 1rem;
+  color: var(--gray-light);
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.value-number {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.value-box.player .value-number {
+  color: var(--score-green);
+}
+
+.value-box.dealer .value-number {
+  color: var(--score-red);
+}
+
+/* Footer */
+.game-footer {
+  text-align: center;
+  margin-top: 40px;
+  padding: 20px;
+  color: var(--gray-light);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes dealCard {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px) rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(0);
+  }
+}
+
+@keyframes buttonGlow {
+  from {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  to {
+    box-shadow: 0 5px 20px rgba(255, 215, 0, 0.5);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Card flip animation */
+@keyframes flipCard {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(180deg);
+  }
+}
+
+.card.flipping {
+  animation: flipCard 0.6s ease-in-out;
+}
+
+/* Shake animation for bust */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .game-container {
+    padding: 10px;
+  }
+  
+  .card {
+    width: 80px;
+    height: 110px;
+  }
+  
+  .card-suit {
+    font-size: 2rem;
+  }
+  
+  .card-value {
+    font-size: 1.5rem;
+  }
+  
+  .game-button {
+    padding: 15px 20px;
+    font-size: 1rem;
+    min-width: 140px;
+  }
+  
+  .score-box {
+    padding: 10px 20px;
+    min-width: 120px;
+  }
+  
+  .value-indicators {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hand-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .cards-container {
+    justify-content: center;
+  }
+  
+  .card {
+    width: 70px;
+    height: 100px;
+  }
+  
+  .buttons-container {
+    flex-direction: column;
+  }
+  
+  .game-button {
+    width: 100%;
+  }
+}
+
+/* Add these animations to the existing CSS */
+
+@keyframes cardHit {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+.card-hit-animation {
+  animation: cardHit 0.5s ease-in-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(100px) rotate(90deg);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) rotate(0deg);
+  }
+}
+
+.card:nth-child(n+3) {
+  animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes winnerGlow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(76, 175, 80, 0.8);
+  }
+}
+
+.hand-container.winner {
+  animation: winnerGlow 1s infinite;
+}
+
+@keyframes chipStack {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.score-box {
+  animation: chipStack 2s ease-in-out infinite;
+}
+
+/* Loading screen */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  border: 3px solid var(--casino-gold);
+}
+
+.loading-spinner {
+  width: 80px;
+  height: 80px;
+  border: 8px solid rgba(255, 215, 0, 0.3);
+  border-top-color: var(--casino-gold);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.loading-text {
+  font-size: 1.5rem;
+  color: var(--casino-gold);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error boundary styling */
+.error-boundary {
+  background: rgba(255, 0, 0, 0.1);
+  border: 2px solid var(--casino-red);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  text-align: center;
+}
+
+.error-boundary h2 {
+  color: var(--casino-red);
+  margin-bottom: 10px;
+}
+
+.error-boundary button {
+  background: var(--casino-red);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
